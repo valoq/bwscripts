@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+(
+    exec bwrap \
+	 --ro-bind /usr/bin/ /usr/bin/ \
+	 --ro-bind /usr/share /usr/share \
+	 --ro-bind /usr/lib /usr/lib \
+	 --ro-bind /usr/lib32 /usr/lib32 \
+	 --ro-bind /lib /lib \
+	 --ro-bind /lib64 /lib64 \
+	 --ro-bind /lib32 /lib32 \
+	 --ro-bind /libx32 /libx32 \
+	 --ro-bind /bin /bin \
+	 --ro-bind /bin /sbin \
+	 --proc /proc \
+	 --dev /dev \
+	 --bind ~/ ~/ \
+	 --tmpfs ~/.gnupg \
+	 --tmpfs ~/.ssh \
+	 --tmpfs ~/.mutt \
+	 --tmpfs ~/.mozilla \
+	 --tmpfs ~/.thunderbird \
+	 --tmpfs ~/.mail \
+	 --tmpfs ~/.Mail \
+	 --tmpfs ~/.claws-mail \
+	 --tmpfs ~/.config \
+	 --tmpfs ~/.cache \
+	 --tmpfs ~/.local \
+	 --tmpfs ~/.pki \
+	 --unsetenv MOZ_PLUGIN_PATH \
+	 --unsetenv DBUS_SESSION_BUS_ADDRESS \
+	 --unsetenv XDG_RUNTIME_DIR \
+	 --unsetenv XAUTHORITY \
+	 --setenv SHELL /bin/false \
+	 --setenv USER nobody \
+	 --unshare-all \
+	 --new-session \
+	 --seccomp 10 \
+	 10< /usr/local/bin/seccomp_default_filter.bpf \
+	 /usr/bin/7z "$@"
+)

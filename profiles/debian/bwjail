@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+(
+    exec bwrap \
+	 --ro-bind /usr/bin/ /usr/bin/ \
+	 --ro-bind /usr/share/ /usr/share/ \
+	 --ro-bind /usr/lib /usr/lib \
+	 --ro-bind /usr/lib32 /usr/lib32 \
+	 --ro-bind /lib /lib \
+	 --ro-bind /lib64 /lib64 \
+	 --ro-bind /lib32 /lib32 \
+	 --ro-bind /libx32 /libx32 \
+	 --ro-bind /bin /bin \
+	 --ro-bind /sbin /sbin \
+	 --proc /proc \
+	 --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
+	 --ro-bind ~/.Xauthority /home/jail/.Xauthority \
+	 --chdir /home/jail \
+	 --unsetenv MOZ_PLUGIN_PATH \
+	 --unsetenv DBUS_SESSION_BUS_ADDRESS \
+	 --unsetenv XDG_RUNTIME_DIR \
+	 --setenv HOME /home/jail \
+	 --setenv XAUTHORITY /home/jail/.Xauthority \
+	 --setenv USER nobody \
+	 --unshare-all \
+	 --new-session \
+	 --seccomp 10 \
+	 10< /usr/local/bin/seccomp_default_filter.bpf \
+	 bash
+)
+
+## --ro-bind "${@: -1}" /home/jail/"$(basename ${@: -1})" \
+    ## bash "$(basename ${@: -1})"
