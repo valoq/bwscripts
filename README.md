@@ -9,7 +9,7 @@ This repository contains some tools for working with bubblewrap as well as examp
 Install
 -------
 
-To automatically use the sandboxed applications profiles, copy the scripts to /usr/local/bin and make them executeable. By default a seccomp bpf file is expected in that directory as well. Use the exportFilter program to generate the seccomp bpf file. You can create individual filters by specifying syscalls to be blacklisted or whitelisted using the defined makros.
+To automatically use the sandboxed applications profiles, copy the scripts to /usr/local/bin and make them executable. By default a seccomp bpf file is expected in that directory as well. Use the exportFilter program to generate the seccomp bpf file. You can create individual filters by specifying syscalls to be blacklisted or whitelisted using the defined macros.
 
 
 
