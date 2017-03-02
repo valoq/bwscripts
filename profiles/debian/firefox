@@ -14,7 +14,8 @@ echo -n $RANDOM | md5sum | tr -d '-' > /tmp/fakeid
 	 --ro-bind /bin /bin \
 	 --ro-bind /sbin /sbin \
 	 --proc /proc \
-	 --dev-bind /dev /dev \
+	 --dev /dev \
+	 --dev-bind /dev/snd /dev/snd \
 	 --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
 	 --ro-bind /etc/passwd /etc/passwd \
 	 --ro-bind /etc/group /etc/group \

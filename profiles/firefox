@@ -12,7 +12,8 @@ set -euo pipefail
 	 --tmpfs /usr/lib/systemd \
 	 --tmpfs /usr/lib/gcc \
 	 --proc /proc \
-	 --dev-bind /dev /dev \
+	 --dev /dev \
+	 --dev-bind /dev/snd /dev/snd \
 	 --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
 	 --ro-bind /etc/passwd /etc/passwd \
 	 --ro-bind /etc/group /etc/group \
