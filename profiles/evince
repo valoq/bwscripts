@@ -30,9 +30,6 @@ set -euo pipefail
 	 --tmpfs ~/.cache \
 	 --tmpfs ~/.local \
 	 --tmpfs ~/.pki \
-	 --tmpfs ~/.zuluCrypt \
-	 --tmpfs ~/.zuluCrypt-socket \
-	 --tmpfs ~/.xpra \
 	 --bind ~/.cache/dconf ~/.cache/dconf \
 	 --bind ~/.cache/fontconfig ~/.cache/fontconfig \
 	 --bind ~/.config/evince ~/.config/evince \

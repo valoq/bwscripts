@@ -28,9 +28,6 @@ set -euo pipefail
 	 --tmpfs ~/.cache \
 	 --tmpfs ~/.local \
 	 --tmpfs ~/.pki \
-	 --tmpfs ~/.zuluCrypt \
-	 --tmpfs ~/.zuluCrypt-socket \
-	 --tmpfs ~/.xpra \
 	 --unsetenv MOZ_PLUGIN_PATH \
 	 --unsetenv XTERM_LOCALE \
 	 --unsetenv TERM \
