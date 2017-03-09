@@ -29,7 +29,7 @@ set -euo pipefail
 	 --setenv HOME /home/jail \
 	 --setenv XAUTHORITY /home/jail/.Xauthority \
 	 --setenv USER nobody \
-	 --unshare-user \
+	 --unshare-user-try \
 	 --unshare-pid \
 	 --unshare-net \
 	 --unshare-uts \

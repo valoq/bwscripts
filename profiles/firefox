@@ -50,7 +50,7 @@ set -euo pipefail
 	 --setenv XAUTHORITY /home/jail/.Xauthority \
 	 --setenv USER nobody \
 	 --setenv LOGNAME nobody \
-	 --unshare-user \
+	 --unshare-user-try \
 	 --unshare-pid \
 	 --unshare-uts \
 	 --unshare-cgroup \

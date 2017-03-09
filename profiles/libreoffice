@@ -43,7 +43,7 @@ set -euo pipefail
 	 --unsetenv XTERM_SHELL \
 	 --unsetenv XDG_RUNTIME_DIR \
 	 --unsetenv MAIL \
-	 --unshare-user \
+	 --unshare-user-try \
 	 --unshare-pid \
 	 --unshare-net \
 	 --unshare-uts \
