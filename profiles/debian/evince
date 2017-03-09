@@ -35,7 +35,11 @@ set -euo pipefail
 	 --unsetenv XDG_RUNTIME_DIR \
 	 --unsetenv DBUS_SESSION_BUS_ADDRESS \
 	 --setenv SHELL /bin/false \
-	 --unshare-all \
+	 --unshare-user-try \
+	 --unshare-pid \
+	 --unshare-net \
+	 --unshare-uts \
+	 --unshare-cgroup \
 	 --new-session \
 	 --seccomp 10 \
 	 10< /usr/local/bin/seccomp_default_filter.bpf \
