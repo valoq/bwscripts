@@ -15,7 +15,6 @@ set -euo pipefail
 	 --tmpfs /usr/lib/gcc \
 	 --proc /proc \
 	 --dev /dev \
-	 --dev-bind /dev/snd /dev/snd \
 	 --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
 	 --ro-bind /etc/passwd /etc/passwd \
 	 --ro-bind /etc/group /etc/group \
@@ -58,7 +57,7 @@ set -euo pipefail
 	 --new-session \
 	 --seccomp 10 \
 	 10< /usr/local/bin/seccomp_default_filter.bpf \
-	 /usr/bin/firefox
+	 /usr/bin/thunderbird
 )
 
 # todo:
