@@ -8,9 +8,6 @@ echo -n $RANDOM | md5sum | tr -d '-' > /tmp/fakeid
 	 --ro-bind /usr/lib /usr/lib \
 	 --ro-bind /usr/lib32 /usr/lib32 \
 	 --ro-bind /lib /lib \
-	 --ro-bind /lib64 /lib64 \
-	 --ro-bind /lib32 /lib32 \
-	 --ro-bind /libx32 /libx32 \
 	 --ro-bind /bin /bin \
 	 --ro-bind /sbin /sbin \
 	 --proc /proc \
@@ -52,7 +49,3 @@ echo -n $RANDOM | md5sum | tr -d '-' > /tmp/fakeid
 	 10< /usr/local/bin/seccomp_default_filter.bpf \
 	 /usr/bin/firefox
 )
-
-
-
-
