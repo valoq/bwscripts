@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-echo -n $RANDOM | md5sum | tr -d '-' > /tmp/fakeid
 (
     exec bwrap \
 	 --ro-bind /usr/bin/ /usr/bin/ \
@@ -28,7 +27,7 @@ echo -n $RANDOM | md5sum | tr -d '-' > /tmp/fakeid
 	 --ro-bind /etc/fonts /etc/fonts \
 	 --ro-bind /etc/mime.types /etc/mime.types \
 	 --ro-bind /etc/pulse /etc/pulse \
-	 --ro-bind /tmp/fakeid /etc/machine-id \
+	 --ro-bind /etc/machine-id /etc/machine-id \
 	 --tmpfs /run \
 	 --ro-bind ~/.Xauthority /home/jail/.Xauthority \
 	 --bind ~/.mozilla /home/jail/.mozilla \
@@ -36,7 +35,6 @@ echo -n $RANDOM | md5sum | tr -d '-' > /tmp/fakeid
 	 --bind ~/Downloads /home/jail/Downloads \
 	 --chdir /home/jail \
 	 --unsetenv DBUS_SESSION_BUS_ADDRESS \
-	 --unsetenv XDG_RUNTIME_DIR \
 	 --setenv SHELL /bin/false \
 	 --setenv HOME /home/jail \
 	 --setenv XAUTHORITY /home/jail/.Xauthority \
