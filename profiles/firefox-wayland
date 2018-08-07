@@ -14,7 +14,7 @@ set -euo pipefail
 	 --tmpfs /usr/lib/modules \
 	 --tmpfs /usr/lib/systemd \
 	 --tmpfs /usr/lib/gcc \
-     --proc /proc \
+	 --proc /proc \
 	 --dev /dev \
 	 --dev-bind /dev/snd /dev/snd \
 	 --ro-bind /etc/passwd /etc/passwd \
@@ -32,13 +32,13 @@ set -euo pipefail
 	 --ro-bind /etc/pulse /etc/pulse \
 	 --tmpfs /run \
 	 --ro-bind /run/user/1000/wayland-0 /run/user/1000/wayland-0 \
-     --bind ~/.mozilla /home/jail/.mozilla \
+	 --bind ~/.mozilla /home/jail/.mozilla \
 	 --bind ~/.cache/mozilla /home/jail/.cache/mozilla \
-     --bind ~/Downloads /home/jail/Downloads \
+	 --bind ~/Downloads /home/jail/Downloads \
 	 --chdir /home/jail \
-     --unsetenv DBUS_SESSION_BUS_ADDRESS \
-     --setenv SHELL /bin/false \
-     --setenv HOME /home/jail \
+	 --unsetenv DBUS_SESSION_BUS_ADDRESS \
+	 --setenv SHELL /bin/false \
+	 --setenv HOME /home/jail \
 	 --setenv USER nobody \
 	 --setenv LOGNAME nobody \
 	 --unshare-user-try \
