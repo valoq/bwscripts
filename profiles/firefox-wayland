@@ -2,8 +2,8 @@
 set -euo pipefail
 (
     exec bwrap \
-	 --ro-bind /usr/bin/firefox /usr/bin/firefox \
-	 --ro-bind /usr/bin/ /usr/bin/ \
+	 --ro-bind /usr/bin/apulse /usr/bin/apulse \
+	 --ro-bind /usr/bin/sh /usr/bin/sh \
 	 --ro-bind /usr/share/ /usr/share/ \
 	 --ro-bind /usr/lib /usr/lib \
 	 --ro-bind /usr/lib64 /usr/lib64 \
@@ -48,7 +48,7 @@ set -euo pipefail
 	 --new-session \
 	 --seccomp 10 \
 	 10< /usr/local/bin/seccomp_default_filter.bpf \
-	 apulse /usr/bin/firefox
+	 apulse /usr/lib/firefox/firefox
 )
 
 # note: running firefox on wayland like this should make a complete sandbox
