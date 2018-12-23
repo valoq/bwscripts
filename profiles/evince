@@ -2,52 +2,52 @@
 set -euo pipefail
 (
     exec bwrap \
-	 --ro-bind /usr/bin/evince /usr/bin/evince \
-	 --ro-bind /usr/share /usr/share \
-	 --ro-bind /usr/lib /usr/lib \
-	 --ro-bind /usr/lib64 /usr/lib64 \
-	 --symlink /usr/lib64 /lib64 \
-	 --tmpfs /usr/lib/modules \
-	 --tmpfs /usr/lib/systemd \
-	 --tmpfs /usr/lib/gcc \
-	 --proc /proc \
-	 --dev /dev \
-	 --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
-	 --ro-bind /etc/fonts /etc/fonts \
-	 --bind /run/user/`id -u`/dconf /run/user/`id -u`/dconf \
-	 --bind /run/user/`id -u`/bus /run/user/`id -u`/bus \
-	 --bind ~/ ~/ \
-	 --ro-bind ~/.Xauthority ~/.Xauthority \
-	 --tmpfs ~/.gnupg \
-	 --tmpfs ~/.ssh \
-	 --tmpfs ~/.mutt \
-	 --tmpfs ~/.mozilla \
-	 --tmpfs ~/.thunderbird \
-	 --tmpfs ~/.mail \
-	 --tmpfs ~/.Mail \
-	 --tmpfs ~/.claws-mail \
-	 --tmpfs ~/.config \
-	 --tmpfs ~/.cache \
-	 --tmpfs ~/.local \
-	 --tmpfs ~/.pki \
-	 --bind ~/.cache/dconf ~/.cache/dconf \
-	 --bind ~/.cache/fontconfig ~/.cache/fontconfig \
-	 --bind ~/.config/evince ~/.config/evince \
-	 --unsetenv MOZ_PLUGIN_PATH \
-	 --unsetenv XTERM_LOCALE \
-	 --unsetenv TERM \
-	 --unsetenv XTERM_VERSION \
-	 --unsetenv XTERM_SHELL \
-	 --unsetenv XDG_RUNTIME_DIR \
-	 --unsetenv MAIL \
-	 --setenv SHELL /bin/false \
-	 --unshare-user-try \
-	 --unshare-pid \
-	 --unshare-net \
-	 --unshare-uts \
-	 --unshare-cgroup \
-	 --new-session \
-	 --seccomp 10 \
-	 10< /usr/local/bin/seccomp_default_filter.bpf \
-	 /usr/bin/evince "$@"
+     --ro-bind /usr/bin/evince /usr/bin/evince \
+     --ro-bind /usr/share /usr/share \
+     --ro-bind /usr/lib /usr/lib \
+     --ro-bind /usr/lib64 /usr/lib64 \
+     --symlink /usr/lib64 /lib64 \
+     --tmpfs /usr/lib/modules \
+     --tmpfs /usr/lib/systemd \
+     --tmpfs /usr/lib/gcc \
+     --proc /proc \
+     --dev /dev \
+     --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
+     --ro-bind /etc/fonts /etc/fonts \
+     --bind /run/user/`id -u`/dconf /run/user/`id -u`/dconf \
+     --bind /run/user/`id -u`/bus /run/user/`id -u`/bus \
+     --bind ~/ ~/ \
+     --ro-bind ~/.Xauthority ~/.Xauthority \
+     --tmpfs ~/.gnupg \
+     --tmpfs ~/.ssh \
+     --tmpfs ~/.mutt \
+     --tmpfs ~/.mozilla \
+     --tmpfs ~/.thunderbird \
+     --tmpfs ~/.mail \
+     --tmpfs ~/.Mail \
+     --tmpfs ~/.claws-mail \
+     --tmpfs ~/.config \
+     --tmpfs ~/.cache \
+     --tmpfs ~/.local \
+     --tmpfs ~/.pki \
+     --bind ~/.cache/dconf ~/.cache/dconf \
+     --bind ~/.cache/fontconfig ~/.cache/fontconfig \
+     --bind ~/.config/evince ~/.config/evince \
+     --unsetenv MOZ_PLUGIN_PATH \
+     --unsetenv XTERM_LOCALE \
+     --unsetenv TERM \
+     --unsetenv XTERM_VERSION \
+     --unsetenv XTERM_SHELL \
+     --unsetenv XDG_RUNTIME_DIR \
+     --unsetenv MAIL \
+     --setenv SHELL /bin/false \
+     --unshare-user-try \
+     --unshare-pid \
+     --unshare-net \
+     --unshare-uts \
+     --unshare-cgroup \
+     --new-session \
+     --seccomp 10 \
+     10< /usr/local/bin/seccomp_default_filter.bpf \
+     /usr/bin/evince "$@"
 )

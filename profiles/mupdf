@@ -2,41 +2,41 @@
 set -euo pipefail
 (
     exec bwrap \
-	 --ro-bind /usr/bin/mupdf /usr/bin/mupdf \
-	 --ro-bind /usr/share /usr/share \
-	 --ro-bind /usr/lib /usr/lib \
-	 --ro-bind /usr/lib64 /usr/lib64 \
-	 --symlink /usr/lib64 /lib64 \
-	 --tmpfs /usr/lib/modules \
-	 --tmpfs /usr/lib/systemd \
-	 --tmpfs /usr/lib/gcc \
-	 --proc /proc \
-	 --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
-	 --ro-bind /etc/fonts /etc/fonts \
-	 --ro-bind ~/.Xauthority /home/jail/.Xauthority \
-	 --ro-bind "${@: -1}" /home/jail/"$(basename ${@: -1})" \
-	 --chdir /home/jail \
-	 --unsetenv MOZ_PLUGIN_PATH \
-	 --unsetenv XTERM_LOCALE \
-	 --unsetenv TERM \
-	 --unsetenv XTERM_VERSION \
-	 --unsetenv XTERM_SHELL \
-	 --unsetenv DBUS_SESSION_BUS_ADDRESS \
-	 --unsetenv XDG_RUNTIME_DIR \
-	 --unsetenv MAIL \
-	 --setenv SHELL /bin/false \
-	 --setenv PATH /usr/bin \
-	 --setenv HOME /home/jail \
-	 --setenv XAUTHORITY /home/jail/.Xauthority \
-	 --setenv USER nobody \
-	 --unshare-user-try \
-	 --unshare-pid \
-	 --unshare-net \
-	 --unshare-uts \
-	 --unshare-cgroup \
-	 --unshare-ipc \
-	 --new-session \
-	 --seccomp 10 \
-	 10< /usr/local/bin/seccomp_default_filter.bpf \
-	 /usr/bin/mupdf "$(basename ${@: -1})" &>/dev/null
+     --ro-bind /usr/bin/mupdf /usr/bin/mupdf \
+     --ro-bind /usr/share /usr/share \
+     --ro-bind /usr/lib /usr/lib \
+     --ro-bind /usr/lib64 /usr/lib64 \
+     --symlink /usr/lib64 /lib64 \
+     --tmpfs /usr/lib/modules \
+     --tmpfs /usr/lib/systemd \
+     --tmpfs /usr/lib/gcc \
+     --proc /proc \
+     --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
+     --ro-bind /etc/fonts /etc/fonts \
+     --ro-bind ~/.Xauthority /home/jail/.Xauthority \
+     --ro-bind "${@: -1}" /home/jail/"$(basename ${@: -1})" \
+     --chdir /home/jail \
+     --unsetenv MOZ_PLUGIN_PATH \
+     --unsetenv XTERM_LOCALE \
+     --unsetenv TERM \
+     --unsetenv XTERM_VERSION \
+     --unsetenv XTERM_SHELL \
+     --unsetenv DBUS_SESSION_BUS_ADDRESS \
+     --unsetenv XDG_RUNTIME_DIR \
+     --unsetenv MAIL \
+     --setenv SHELL /bin/false \
+     --setenv PATH /usr/bin \
+     --setenv HOME /home/jail \
+     --setenv XAUTHORITY /home/jail/.Xauthority \
+     --setenv USER nobody \
+     --unshare-user-try \
+     --unshare-pid \
+     --unshare-net \
+     --unshare-uts \
+     --unshare-cgroup \
+     --unshare-ipc \
+     --new-session \
+     --seccomp 10 \
+     10< /usr/local/bin/seccomp_default_filter.bpf \
+     /usr/bin/mupdf "$(basename ${@: -1})" &>/dev/null
 )

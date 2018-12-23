@@ -41,14 +41,14 @@ int main(int argc, char *argv[])
 
     /* ctx = seccomp_init(SCMP_ACT_KILL); */
     /* if (ctx == NULL) */
-    /* 	goto out; */
+    /*     goto out; */
 
 
     /* for blacklisting */
     
     ctx = seccomp_init(SCMP_ACT_ALLOW);
     if (ctx == NULL)
-	goto out;
+    goto out;
 
     
     /* start of syscall filter list */
@@ -111,17 +111,17 @@ int main(int argc, char *argv[])
 
     /* end of syscall filter list */
     
-	    
+    
     filter_fd = open("/tmp/seccomp_filter.bpf", O_CREAT | O_WRONLY, 0644);
     if (filter_fd == -1) {
-	rc = -errno;
-	goto out;
+        rc = -errno;
+        goto out;
     }
 
     rc = seccomp_export_bpf(ctx, filter_fd);
     if (rc < 0) {
-	close(filter_fd);
-	goto out;
+        close(filter_fd);
+        goto out;
     }
     close(filter_fd);
 
