@@ -2,16 +2,16 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/ /usr/bin/ \
+     --ro-bind /usr/bin /usr/bin/ \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
-     --ro-bind /usr/lib32 /usr/lib32 \
-     --ro-bind /lib /lib \
-     --ro-bind /lib64 /lib64 \
-     --ro-bind /lib32 /lib32 \
-     --ro-bind /libx32 /libx32 \
-     --ro-bind /bin /bin \
-     --ro-bind /bin /sbin \
+     --ro-bind /usr/lib64 /usr/lib64 \
+     --symlink /usr/lib64 /lib64 \
+     --symlink /usr/lib /lib \
+     --symlink /usr/bin /bin \
+     --symlink /usr/bin /sbin \
+     --tmpfs /usr/lib/modules \
+     --tmpfs /usr/lib/systemd \
      --proc /proc \
      --dev /dev \
      --bind ~/ ~/ \
@@ -37,5 +37,5 @@ set -euo pipefail
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/7za "$@"
+     /usr/bin/xz "$@"
 )

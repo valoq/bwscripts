@@ -37,5 +37,5 @@ set -euo pipefail
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/7za "$@"
+     /usr/bin/atool "$@"
 )

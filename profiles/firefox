@@ -4,7 +4,7 @@ set -euo pipefail
     exec bwrap \
      --ro-bind /usr/bin/apulse /usr/bin/apulse \
      --ro-bind /usr/bin/sh /usr/bin/sh \
-     --ro-bind /usr/share/ /usr/share/ \
+     --ro-bind /usr/share /usr/share/ \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \

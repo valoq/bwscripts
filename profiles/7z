@@ -2,7 +2,7 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/ /usr/bin/ \
+     --ro-bind /usr/bin /usr/bin/ \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
@@ -12,7 +12,6 @@ set -euo pipefail
      --symlink /usr/bin /sbin \
      --tmpfs /usr/lib/modules \
      --tmpfs /usr/lib/systemd \
-     --tmpfs /usr/lib/gcc \
      --proc /proc \
      --dev /dev \
      --bind ~/ ~/ \
@@ -29,16 +28,10 @@ set -euo pipefail
      --tmpfs ~/.local \
      --tmpfs ~/.pki \
      --unsetenv MOZ_PLUGIN_PATH \
-     --unsetenv XTERM_LOCALE \
-     --unsetenv TERM \
-     --unsetenv XTERM_VERSION \
-     --unsetenv XTERM_SHELL \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unsetenv XDG_RUNTIME_DIR \
-     --unsetenv MAIL \
      --unsetenv XAUTHORITY \
      --setenv SHELL /bin/false \
-     --setenv PATH /usr/bin \
      --setenv USER nobody \
      --unshare-all \
      --new-session \
