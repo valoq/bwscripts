@@ -2,37 +2,9 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin /usr/bin/ \
-     --ro-bind /usr/share /usr/share \
-     --ro-bind /usr/lib /usr/lib \
-     --ro-bind /usr/lib64 /usr/lib64 \
-     --symlink /usr/lib64 /lib64 \
-     --symlink /usr/lib /lib \
-     --symlink /usr/bin /bin \
-     --symlink /usr/bin /sbin \
-     --tmpfs /usr/lib/modules \
-     --tmpfs /usr/lib/systemd \
+     --bind / / \
      --proc /proc \
      --dev /dev \
-     --bind ~/ ~/ \
-     --tmpfs ~/.gnupg \
-     --tmpfs ~/.ssh \
-     --tmpfs ~/.mutt \
-     --tmpfs ~/.mozilla \
-     --tmpfs ~/.thunderbird \
-     --tmpfs ~/.mail \
-     --tmpfs ~/.Mail \
-     --tmpfs ~/.claws-mail \
-     --tmpfs ~/.config \
-     --tmpfs ~/.cache \
-     --tmpfs ~/.local \
-     --tmpfs ~/.pki \
-     --unsetenv MOZ_PLUGIN_PATH \
-     --unsetenv DBUS_SESSION_BUS_ADDRESS \
-     --unsetenv XDG_RUNTIME_DIR \
-     --unsetenv XAUTHORITY \
-     --setenv SHELL /bin/false \
-     --setenv USER nobody \
      --unshare-all \
      --new-session \
      --seccomp 10 \
