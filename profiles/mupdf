@@ -14,7 +14,7 @@ set -euo pipefail
      --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
      --ro-bind /etc/fonts /etc/fonts \
      --ro-bind ~/.Xauthority /home/jail/.Xauthority \
-     --ro-bind "${@: -1}" /home/jail/"$(basename ${@: -1})" \
+     --ro-bind "${@: -1}" /home/jail/"$(basename "${@: -1}")" \
      --chdir /home/jail \
      --unsetenv MOZ_PLUGIN_PATH \
      --unsetenv XTERM_LOCALE \
@@ -38,5 +38,5 @@ set -euo pipefail
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/mupdf "$(basename ${@: -1})" &>/dev/null
+     /usr/bin/mupdf "$(basename "${@: -1}")" &>/dev/null
 )
