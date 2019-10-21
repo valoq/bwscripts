@@ -14,8 +14,8 @@ set -euo pipefail
      --dev /dev \
      --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
      --ro-bind /etc/fonts /etc/fonts \
-     --bind /run/user/`id -u`/dconf /run/user/`id -u`/dconf \
-     --bind /run/user/`id -u`/bus /run/user/`id -u`/bus \
+     --bind /run/user/"$(id -u)"/dconf /run/user/"$(id -u)"/dconf \
+     --bind /run/user/"$(id -u)"/bus /run/user/"$(id -u)"/bus \
      --bind ~/ ~/ \
      --ro-bind ~/.Xauthority ~/.Xauthority \
      --tmpfs ~/.gnupg \

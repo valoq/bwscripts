@@ -31,7 +31,7 @@ set -euo pipefail
      --ro-bind /etc/mime.types /etc/mime.types \
      --ro-bind /etc/pulse /etc/pulse \
      --tmpfs /run \
-     --ro-bind /run/user/1000/wayland-0 /run/user/1000/wayland-0 \
+     --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
      --bind ~/.mozilla /home/jail/.mozilla \
      --bind ~/.cache/mozilla /home/jail/.cache/mozilla \
      --bind ~/Downloads /home/jail/Downloads \

@@ -17,8 +17,8 @@ set -euo pipefail
      --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
      --ro-bind /etc /etc \
      --ro-bind /sys /sys \
-     --bind /run/user/`id -u`/dconf /run/user/`id -u`/dconf \
-     --bind /run/user/`id -u`/bus /run/user/`id -u`/bus \
+     --bind /run/user/"$(id -u)"/dconf /run/user/"$(id -u)"/dconf \
+     --bind /run/user/"$(id -u)"/bus /run/user/"$(id -u)"/bus \
      --bind ~/ ~/ \
      --tmpfs ~/.gnupg \
      --tmpfs ~/.ssh \
