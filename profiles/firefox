@@ -32,6 +32,7 @@ set -euo pipefail
      --ro-bind /etc/fonts /etc/fonts \
      --ro-bind /etc/mime.types /etc/mime.types \
      --ro-bind /etc/pulse /etc/pulse \
+     --ro-bind /etc/asound.conf /etc/asound.conf \
      --tmpfs /run \
      --ro-bind ~/.Xauthority /home/jail/.Xauthority \
      --bind ~/.mozilla /home/jail/.mozilla \

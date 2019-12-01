@@ -30,6 +30,7 @@ set -euo pipefail
      --ro-bind /etc/fonts /etc/fonts \
      --ro-bind /etc/mime.types /etc/mime.types \
      --ro-bind /etc/pulse /etc/pulse \
+     --ro-bind /etc/asound.conf /etc/asound.conf \
      --tmpfs /run \
      --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
      --bind ~/.mozilla /home/jail/.mozilla \
@@ -41,6 +42,7 @@ set -euo pipefail
      --setenv HOME /home/jail \
      --setenv USER nobody \
      --setenv LOGNAME nobody \
+     --setenv MOZ_ENABLE_WAYLAND 1 \
      --unshare-user-try \
      --unshare-pid \
      --unshare-uts \

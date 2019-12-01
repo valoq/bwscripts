@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
     DENY_RULE (acct);
     DENY_RULE (add_key);
     DENY_RULE (adjtimex);
-    DENY_RULE (chroot);
+    /* DENY_RULE (chroot); required by firefox */
     DENY_RULE (clock_adjtime);
     DENY_RULE (create_module);
     DENY_RULE (delete_module);
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
     /* end of syscall filter list */
     
     
-    filter_fd = open("/tmp/seccomp_filter.bpf", O_CREAT | O_WRONLY, 0644);
+    filter_fd = open("seccomp_filter.bpf", O_CREAT | O_WRONLY, 0644);
     if (filter_fd == -1) {
         rc = -errno;
         goto out;
