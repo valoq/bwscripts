@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+mkdir -p ~/.doc
 (
     exec bwrap \
      --ro-bind /usr/bin /usr/bin/ \
@@ -17,32 +18,24 @@ set -euo pipefail
      --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
      --ro-bind /etc /etc \
      --ro-bind /sys /sys \
-     --bind /run/user/"$(id -u)"/dconf /run/user/"$(id -u)"/dconf \
-     --bind /run/user/"$(id -u)"/bus /run/user/"$(id -u)"/bus \
-     --bind ~/ ~/ \
-     --tmpfs ~/.gnupg \
-     --tmpfs ~/.ssh \
-     --tmpfs ~/.mutt \
-     --tmpfs ~/.mozilla \
-     --tmpfs ~/.thunderbird \
-     --tmpfs ~/.mail \
-     --tmpfs ~/.Mail \
-     --tmpfs ~/.claws-mail \
-     --tmpfs ~/.config \
-     --tmpfs ~/.cache \
-     --tmpfs ~/.local \
-     --tmpfs ~/.pki \
-     --bind ~/.cache/dconf ~/.cache/dconf \
-     --bind ~/.cache/fontconfig ~/.cache/fontconfig \
-     --ro-bind ~/.Xauthority ~/.Xauthority \
-     --bind ~/.config/libreoffice ~/.config/libreoffice \
+     --unsetenv MOZ_PLUGIN_PATH \
      --unsetenv MOZ_PLUGIN_PATH \
      --unsetenv XTERM_LOCALE \
      --unsetenv TERM \
      --unsetenv XTERM_VERSION \
      --unsetenv XTERM_SHELL \
+     --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unsetenv XDG_RUNTIME_DIR \
      --unsetenv MAIL \
+     --setenv SHELL /bin/false \
+     --setenv PATH /usr/bin \
+     --setenv HOME /home/jail \
+     --setenv USER nobody \
+     --bind ~/.cache/fontconfig /home/jail/.cache/fontconfig \
+     --bind ~/.config/libreoffice /home/jail/.config/libreoffice \
+     --bind ~/.doc /home/jail \
+     --bind "${@: -1}" /home/jail/"$(basename "${@: -1}")" \
+     --chdir /home/jail \
      --unshare-user-try \
      --unshare-pid \
      --unshare-net \
@@ -53,3 +46,4 @@ set -euo pipefail
      10< /usr/local/bin/seccomp_default_filter.bpf \
      /usr/bin/libreoffice "$@"
 )
+mv -n ~/.doc/*.* ~/
