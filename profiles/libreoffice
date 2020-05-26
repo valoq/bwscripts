@@ -19,7 +19,6 @@ mkdir -p ~/.doc
      --ro-bind /etc /etc \
      --ro-bind /sys /sys \
      --unsetenv MOZ_PLUGIN_PATH \
-     --unsetenv MOZ_PLUGIN_PATH \
      --unsetenv XTERM_LOCALE \
      --unsetenv TERM \
      --unsetenv XTERM_VERSION \
@@ -29,13 +28,10 @@ mkdir -p ~/.doc
      --unsetenv MAIL \
      --setenv SHELL /bin/false \
      --setenv PATH /usr/bin \
-     --setenv HOME /home/jail \
-     --setenv USER nobody \
-     --bind ~/.cache/fontconfig /home/jail/.cache/fontconfig \
-     --bind ~/.config/libreoffice /home/jail/.config/libreoffice \
-     --bind ~/.doc /home/jail \
-     --bind "${@: -1}" /home/jail/"$(basename "${@: -1}")" \
-     --chdir /home/jail \
+     --bind ~/.cache/fontconfig ~/.cache/fontconfig \
+     --bind ~/.config/libreoffice ~/.config/libreoffice \
+     --bind ~/.doc ~/ \
+     --bind "${@: -1}" "${@: -1}" \
      --unshare-user-try \
      --unshare-pid \
      --unshare-net \
