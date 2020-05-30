@@ -30,7 +30,7 @@ mkdir -p ~/.doc
      --setenv PATH /usr/bin \
      --bind ~/.cache/fontconfig ~/.cache/fontconfig \
      --bind ~/.config/libreoffice ~/.config/libreoffice \
-     --bind ~/.doc ~/ \
+     --bind ~/.doc ~/Documents \
      --bind "${@: -1}" "${@: -1}" \
      --unshare-user-try \
      --unshare-pid \
