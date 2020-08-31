@@ -2,22 +2,22 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/evince /usr/bin/evince \
+     --ro-bind /usr/bin/zathura /usr/bin/zathura \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
      --proc /proc \
-     --dev /dev \
-     --ro-bind /etc/fonts /etc/fonts \
      --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
+     --ro-bind /etc/fonts /etc/fonts \
+     --ro-bind ~/.config/zathura ~/.config/zathura \
      --ro-bind ~/.cache/fontconfig ~/.cache/fontconfig \
-     --ro-bind ~/.config/evince ~/.config/evince \
      --ro-bind "${@: -1}" ~/"$(basename "${@: -1}")" \
      --chdir ~/ \
+     --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/evince "$@"
+     /usr/bin/zathura --config-dir=~/.config/zathura/ "$(basename "${@: -1}")"
 )

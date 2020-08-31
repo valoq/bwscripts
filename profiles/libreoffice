@@ -1,45 +1,28 @@
 #!/usr/bin/env bash
 set -euo pipefail
-mkdir -p ~/.doc
 (
     exec bwrap \
-     --ro-bind /usr/bin /usr/bin/ \
+     --ro-bind /usr/bin /usr/bin \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
-     --bind /tmp /tmp \
      --symlink /usr/lib64 /lib64 \
      --symlink /usr/bin /bin \
-     --tmpfs /usr/lib/modules \
-     --tmpfs /usr/lib/systemd \
-     --tmpfs /usr/lib/gcc \
      --proc /proc \
      --dev /dev \
-     --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
+     --tmpfs /tmp \
+     --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
      --ro-bind /etc /etc \
      --ro-bind /sys /sys \
-     --unsetenv MOZ_PLUGIN_PATH \
-     --unsetenv XTERM_LOCALE \
-     --unsetenv TERM \
-     --unsetenv XTERM_VERSION \
-     --unsetenv XTERM_SHELL \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
-     --unsetenv XDG_RUNTIME_DIR \
-     --unsetenv MAIL \
-     --setenv SHELL /bin/false \
-     --setenv PATH /usr/bin \
      --bind ~/.cache/fontconfig ~/.cache/fontconfig \
      --bind ~/.config/libreoffice ~/.config/libreoffice \
-     --bind ~/.doc ~/Documents \
+     --bind ~/Documents ~/Documents \
      --bind "${@: -1}" "${@: -1}" \
-     --unshare-user-try \
-     --unshare-pid \
-     --unshare-net \
-     --unshare-uts \
-     --unshare-cgroup \
+     --chdir ~/Documents \
+     --unshare-all \
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
      /usr/bin/libreoffice "$@"
 )
-mv -n ~/.doc/*.* ~/
