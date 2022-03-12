@@ -2,7 +2,6 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/apulse /usr/bin/apulse \
      --ro-bind /usr/bin/sh /usr/bin/sh \
      --ro-bind /usr/share /usr/share/ \
      --ro-bind /usr/lib /usr/lib \
@@ -43,11 +42,14 @@ set -euo pipefail
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     apulse /usr/lib/firefox/firefox
+     /usr/lib/firefox/firefox
 )
 
-# note: running firefox on wayland like this should make a complete sandbox
+# note: For the sandbox to be effective, run on wayland environments only (instead of X11)
 
+# in case firefox was build without the --enable-alsa flag, change to script to run with apulse like this:
+# --ro-bind /usr/bin/apulse /usr/bin/apulse \
+# apulse /usr/lib/firefox/firefox
 
 # -ro-bind /etc/alsa /etc/alsa \
 
