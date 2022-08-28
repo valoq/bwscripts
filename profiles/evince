@@ -10,7 +10,7 @@ set -euo pipefail
      --proc /proc \
      --dev /dev \
      --ro-bind /etc/fonts /etc/fonts \
-     --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
+     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
      --ro-bind ~/.cache/fontconfig ~/.cache/fontconfig \
      --ro-bind ~/.config/evince ~/.config/evince \
      --ro-bind "${@: -1}" ~/"$(basename "${@: -1}")" \

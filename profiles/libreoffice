@@ -9,17 +9,13 @@ set -euo pipefail
      --symlink /usr/lib64 /lib64 \
      --symlink /usr/bin /bin \
      --proc /proc \
-     --dev /dev \
      --tmpfs /tmp \
-     --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
      --ro-bind /etc /etc \
-     --ro-bind /sys /sys \
-     --unsetenv DBUS_SESSION_BUS_ADDRESS \
+     --ro-bind /run/systemd/userdb /run/systemd/userdb \
+     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
      --bind ~/.cache/fontconfig ~/.cache/fontconfig \
      --bind ~/.config/libreoffice ~/.config/libreoffice \
-     --bind ~/Documents ~/Documents \
      --bind "${@: -1}" "${@: -1}" \
-     --chdir ~/Documents \
      --unshare-all \
      --new-session \
      --seccomp 10 \

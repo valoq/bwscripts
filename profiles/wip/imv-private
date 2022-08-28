@@ -10,7 +10,7 @@ set -euo pipefail
      --proc /proc \
      --dev /dev \
      --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
-     --ro-bind "$PWD" "$PWD" \
+     --ro-bind "${@: -1}" ~/"$(basename "${@: -1}")" \
      --unshare-user \
      --unshare-pid \
      --unshare-net \

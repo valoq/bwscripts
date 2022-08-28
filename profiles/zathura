@@ -8,7 +8,7 @@ set -euo pipefail
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
      --proc /proc \
-     --ro-bind /run/user/"$(id -u)"/wayland-0 /run/user/"$(id -u)"/wayland-0 \
+     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
      --ro-bind /etc/fonts /etc/fonts \
      --ro-bind ~/.config/zathura ~/.config/zathura \
      --ro-bind ~/.cache/fontconfig ~/.cache/fontconfig \
