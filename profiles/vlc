@@ -10,7 +10,8 @@ set -euo pipefail
      --symlink /usr/bin /bin \
      --proc /proc \
      --dev-bind /dev /dev \
-     --ro-bind /tmp/.X11-unix /tmp/.X11-unix \
+     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
+     --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
      --ro-bind /etc /etc \
      --ro-bind ~/.config/vlc ~/.config/vlc \
      --ro-bind "${@: -1}" ~/"$(basename "${@: -1}")" \
@@ -27,4 +28,4 @@ set -euo pipefail
      /usr/bin/vlc "$(basename "${@: -1}")"
 )
 
-# warning: still uses read-only X11 socket
+## requires qt5-wayland to run on wayland

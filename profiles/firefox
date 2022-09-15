@@ -40,13 +40,15 @@ set -euo pipefail
      --ro-bind /etc/gtk-3.0 /etc/gtk-3.0 \
      --ro-bind /etc/fonts /etc/fonts \
      --ro-bind /etc/mime.types /etc/mime.types \
-     --ro-bind /etc/pulse /etc/pulse \
-     --ro-bind /etc/asound.conf /etc/asound.conf \
+     --ro-bind-try /etc/alsa /etc/alsa \
+     --ro-bind-try /etc/pulse /etc/pulse \
+     --ro-bind-try /etc/pipewire /etc/pipewire \
      --tmpfs /run \
      --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
-     --bind ~/Downloads ~/Downloads \
-     --bind ~/.mozilla ~/.mozilla \
-     --bind ~/.cache/mozilla ~/.cache/mozilla \
+     --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
+     --bind-try ~/Downloads ~/Downloads \
+     --bind-try ~/.mozilla ~/.mozilla \
+     --bind-try ~/.cache/mozilla ~/.cache/mozilla \
      --chdir ~/ \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --setenv MOZ_ENABLE_WAYLAND 1 \
@@ -61,11 +63,9 @@ set -euo pipefail
      /usr/lib/firefox/firefox
 )
 
-# note: For the sandbox to be effective, run on wayland environments only (instead of X11)
+# note: This profile requires an execution environement with available wayland and pipewire services.
 
-# in case firefox was build without the --enable-alsa flag, change to script to run with apulse like this:
-# --ro-bind /usr/bin/apulse /usr/bin/apulse \
-# apulse /usr/lib/firefox/firefox
+
 
 # -ro-bind /etc/alsa /etc/alsa \
 
