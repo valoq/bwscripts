@@ -15,7 +15,7 @@ set -euo pipefail
      --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
      --bind ~/.cache/fontconfig ~/.cache/fontconfig \
      --bind ~/.config/libreoffice ~/.config/libreoffice \
-     --bind "${@: -1}" "${@: -1}" \
+     --bind "$PWD" "$PWD" \
      --unshare-all \
      --new-session \
      --seccomp 10 \

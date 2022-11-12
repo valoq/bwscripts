@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+if [ ! -z "$(pgrep --uid "$(id -u)" firefox)" ]
+then
+    echo "firefox already running"
+    exit
+fi
+
 (
     exec bwrap \
      --ro-bind /usr/bin/sh /usr/bin/sh \

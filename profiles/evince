@@ -19,5 +19,5 @@ set -euo pipefail
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/evince "$@"
+     /usr/bin/evince "$(basename "${@: -1}")"
 )
