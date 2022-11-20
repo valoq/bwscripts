@@ -24,4 +24,10 @@ This repository is not associated with the official bubblewrap project
 Warning
 -------
 
-Using the provided scripts to sandbox linux desktop applications only provides limited protection as there are several weak points like the X-Window-Server and Dbus IPC that need to be isolated as well to prevent sandbox escape. 
+Using the provided scripts to sandbox linux desktop applications only provides limited protection as there are several weak points like the X-Window-Server and Dbus IPC that need to be isolated as well to prevent sandbox escape. See Sandbox Status for details on the example scripts
+
+
+Sandbox Status
+--------------
+
+todo
