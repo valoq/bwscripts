@@ -15,12 +15,10 @@ set -euo pipefail
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --bind-try ~/.cache/fontconfig ~/.cache/fontconfig \
      --bind-try ~/.config/libreoffice ~/.config/libreoffice \
-     --ro-bind-try "${@: -1}" "${@: -1}" \
+     --bind-try "${@: -1}" "${@: -1}" \
      --unshare-all \
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
      /usr/bin/libreoffice "$@"
 )
-
-

@@ -26,8 +26,5 @@ set -euo pipefail
      /usr/bin/vlc "$@"
 )
 
-## todo:
-#  - find a way to mount pipewire socket dynamically 
-
 ## requires qt5-wayland to run on wayland
 ##  wayland support in vlc is currently still under development
