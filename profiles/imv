@@ -2,15 +2,16 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/ /usr/bin/ \
+     --ro-bind /usr/bin /usr/bin \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
      --proc /proc \
      --dev /dev \
-     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
-     --ro-bind "${@: -1}" ~/"$(basename "${@: -1}")" \
+     --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
+     --ro-bind-try ~/.config/imv/ ~/.config/imv/ \
+     --ro-bind-try "${@: -1}" "${@: -1}" \
      --unshare-user \
      --unshare-pid \
      --unshare-net \
@@ -19,5 +20,5 @@ set -euo pipefail
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/imv-wayland "$(basename "${@: -1}")"
+     /usr/bin/imv-wayland "$@"
 )

@@ -19,7 +19,6 @@ fi
      --symlink /usr/bin /sbin \
      --proc /proc \
      --dev /dev \
-     --dev-bind /dev/snd /dev/snd \
      --dev-bind-try /dev/hidraw0 /dev/hidraw0 \
      --dev-bind-try /dev/hidraw1 /dev/hidraw1 \
      --dev-bind-try /dev/hidraw2 /dev/hidraw2 \
@@ -51,7 +50,7 @@ fi
      --ro-bind-try /etc/pulse /etc/pulse \
      --ro-bind-try /etc/pipewire /etc/pipewire \
      --tmpfs /run \
-     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
+     --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
      --bind-try ~/Downloads ~/Downloads \
      --bind-try ~/.mozilla ~/.mozilla \
@@ -70,13 +69,7 @@ fi
      /usr/lib/firefox/firefox
 )
 
-# note: This profile requires an execution environement with available wayland and pipewire services.
 
-
-
-# -ro-bind /etc/alsa /etc/alsa \
-
-# todo:
 
 #      --ro-bind /usr/share/locale /usr/share/locale \
 #      --ro-bind /usr/share/X11 /usr/share/X11 \

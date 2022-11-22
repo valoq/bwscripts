@@ -19,3 +19,7 @@ set -euo pipefail
      10< /usr/local/bin/seccomp_default_filter.bpf \
      /usr/bin/atool "$@"
 )
+
+# Status: Incomplete
+# This script mounts the current working directory to extract and write new files
+# Depending in the execution path, this may be dangerous and can lead to sandbox escape

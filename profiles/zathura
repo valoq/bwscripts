@@ -8,16 +8,20 @@ set -euo pipefail
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
      --proc /proc \
-     --ro-bind /run/user/"$(id -u)"/wayland-1 /run/user/"$(id -u)"/wayland-1 \
+     --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind /etc/fonts /etc/fonts \
-     --ro-bind ~/.config/zathura ~/.config/zathura \
-     --ro-bind ~/.cache/fontconfig ~/.cache/fontconfig \
-     --ro-bind "${@: -1}" ~/"$(basename "${@: -1}")" \
-     --chdir ~/ \
+     --ro-bind-try ~/.config/zathura ~/.config/zathura \
+     --ro-bind-try ~/.cache/fontconfig ~/.cache/fontconfig \
+     --ro-bind-try "${@: -1}" "${@: -1}" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/zathura --config-dir=~/.config/zathura/ "$(basename "${@: -1}")"
+     /usr/bin/zathura --config-dir=~/.config/zathura/ "$@"
 )
+
+
+## zathura also supports a native sandbox via seccomp filter
+## To use the internal sandbox in addition, add this to ~/.config/zathura/zathurarc :
+## set sandbox strict
