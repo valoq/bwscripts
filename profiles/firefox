@@ -69,6 +69,7 @@ fi
      /usr/lib/firefox/firefox
 )
 
+# todo: block abstract sockets
 
 
 #      --ro-bind /usr/share/locale /usr/share/locale \

@@ -34,3 +34,4 @@ Todo
 
 - support xdg-portal APIs
 - find a way to mount pipewire socket dynamically
+- handle abstract sockets in network namespaces through custom seccomp filter
