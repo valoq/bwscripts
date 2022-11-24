@@ -2,26 +2,25 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/zathura /usr/bin/zathura \
+     --ro-bind /usr/bin/ /usr/bin/ \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
+     --symlink /usr/bin /bin \
+     --dev /dev \
      --proc /proc \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
-     --ro-bind /etc/fonts /etc/fonts \
-     --ro-bind-try ~/.config/zathura ~/.config/zathura \
-     --ro-bind-try ~/.cache/fontconfig ~/.cache/fontconfig \
+     --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
+     --ro-bind /etc /etc \
+     --ro-bind-try ~/.config/mpv ~/.config/mpv \
      --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
-     --new-session \
      --seccomp 10 \
+     --new-session \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/zathura "$@"
+     /usr/bin/mpv --no-terminal "$@"
 )
 
-
-## zathura also supports a native sandbox via seccomp filter
-## To use the internal sandbox in addition, add this to ~/.config/zathura/zathurarc :
-## set sandbox strict
+## remove --no-session if you want terminal control in mpv

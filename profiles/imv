@@ -11,7 +11,7 @@ set -euo pipefail
      --dev /dev \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind-try ~/.config/imv/ ~/.config/imv/ \
-     --ro-bind-try "${@: -1}" "${@: -1}" \
+     --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unshare-user \
      --unshare-pid \
      --unshare-net \

@@ -13,7 +13,7 @@ set -euo pipefail
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind-try ~/.cache/fontconfig ~/.cache/fontconfig \
      --ro-bind-try ~/.config/evince ~/.config/evince \
-     --ro-bind-try "${@: -1}" "${@: -1}" \
+     --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unshare-all \
      --new-session \
      --seccomp 10 \

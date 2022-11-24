@@ -13,7 +13,7 @@ set -euo pipefail
      --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
      --ro-bind /etc /etc \
      --ro-bind-try ~/.config/vlc ~/.config/vlc \
-     --ro-bind-try "${@: -1}" "${@: -1}" \
+     --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-user-try \
      --unshare-pid \
