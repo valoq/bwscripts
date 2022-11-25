@@ -2,7 +2,7 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/ /usr/bin/ \
+     --ro-bind /usr/bin /usr/bin \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
@@ -23,4 +23,4 @@ set -euo pipefail
      /usr/bin/mpv --no-terminal "$@"
 )
 
-## remove --no-session if you want terminal control in mpv
+## remove --no-session and --no-terminal if you want terminal control in mpv

@@ -29,23 +29,23 @@ fi
      --dev-bind-try /dev/hidraw7 /dev/hidraw7 \
      --dev-bind-try /dev/hidraw8 /dev/hidraw8 \
      --dev-bind-try /dev/hidraw9 /dev/hidraw9 \
-     --dev-bind /dev/char /dev/char \
-     --dev-bind /dev/usb /dev/usb \
-     --ro-bind /sys/bus/usb /sys/bus/usb \
-     --ro-bind /sys/class/hidraw /sys/class/hidraw \
-     --ro-bind /sys/devices/pci0000:00 /sys/devices/pci0000:00 \
+     --dev-bind-try /dev/char /dev/char \
+     --dev-bind-try /dev/usb /dev/usb \
+     --ro-bind-try /sys/bus/usb /sys/bus/usb \
+     --ro-bind-try /sys/class/hidraw /sys/class/hidraw \
+     --ro-bind-try /sys/devices/pci0000:00 /sys/devices/pci0000:00 \
      --ro-bind /etc/passwd /etc/passwd \
      --ro-bind /etc/group /etc/group \
      --ro-bind /etc/hostname /etc/hostname \
      --ro-bind /etc/hosts /etc/hosts \
      --ro-bind /etc/localtime /etc/localtime \
      --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
-     --ro-bind /etc/resolv.conf /etc/resolv.conf \
-     --ro-bind /etc/xdg /etc/xdg \
-     --ro-bind /etc/gtk-2.0 /etc/gtk-2.0 \
-     --ro-bind /etc/gtk-3.0 /etc/gtk-3.0 \
-     --ro-bind /etc/fonts /etc/fonts \
-     --ro-bind /etc/mime.types /etc/mime.types \
+     --ro-bind-try /etc/resolv.conf /etc/resolv.conf \
+     --ro-bind-try /etc/xdg /etc/xdg \
+     --ro-bind-try /etc/gtk-2.0 /etc/gtk-2.0 \
+     --ro-bind-try /etc/gtk-3.0 /etc/gtk-3.0 \
+     --ro-bind-try /etc/fonts /etc/fonts \
+     --ro-bind-try /etc/mime.types /etc/mime.types \
      --ro-bind-try /etc/alsa /etc/alsa \
      --ro-bind-try /etc/pulse /etc/pulse \
      --ro-bind-try /etc/pipewire /etc/pipewire \
@@ -55,13 +55,10 @@ fi
      --bind-try ~/Downloads ~/Downloads \
      --bind-try ~/.mozilla ~/.mozilla \
      --bind-try ~/.cache/mozilla ~/.cache/mozilla \
-     --chdir ~/ \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --setenv MOZ_ENABLE_WAYLAND 1 \
-     --unshare-user-try \
-     --unshare-pid \
-     --unshare-uts \
-     --unshare-cgroup-try \
+     --unshare-all \
+     --share-net \
      --hostname mypc \
      --new-session \
      --seccomp 10 \

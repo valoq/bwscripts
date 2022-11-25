@@ -15,11 +15,7 @@ set -euo pipefail
      --ro-bind-try ~/.config/vlc ~/.config/vlc \
      --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
-     --unshare-user-try \
-     --unshare-pid \
-     --unshare-net \
-     --unshare-uts \
-     --unshare-cgroup-try \
+     --unshare-all \
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
