@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/socket.h>
 
 #define DENY_RULE(call) { if (seccomp_rule_add (ctx, SCMP_ACT_KILL, SCMP_SYS(call), 0) < 0) goto out; }
 #define ALLOW_RULE(call) { if (seccomp_rule_add (ctx, SCMP_ACT_ALLOW, SCMP_SYS(call), 0) < 0) goto out; }
@@ -54,7 +55,7 @@ int main(int argc, char *argv[])
     /* start of syscall filter list */
 
 
-    /* common blacklist with dangerous and rarely used syscalls */
+    /* common blacklist with privileged syscalls */
     
     DENY_RULE (_sysctl);
     DENY_RULE (acct);
@@ -108,9 +109,13 @@ int main(int argc, char *argv[])
     DENY_RULE (uselib);
     DENY_RULE (vmsplice);
 
+    /* filter connect arguments to block communication to abstracte sockets  */
+    if (seccomp_rule_add (ctx, SCMP_ACT_KILL, SCMP_SYS(connect), 1,
+                          SCMP_CMP(1, SCMP_CMP_EQ, '\0')) < 0)
+        goto out;
+    
 
     /* end of syscall filter list */
-    
     
     filter_fd = open("seccomp_filter.bpf", O_CREAT | O_WRONLY, 0644);
     if (filter_fd == -1) {
