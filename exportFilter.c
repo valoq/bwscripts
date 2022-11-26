@@ -110,10 +110,11 @@ int main(int argc, char *argv[])
     DENY_RULE (vmsplice);
 
     /* filter connect arguments to block communication to abstracte sockets  */
-    if (seccomp_rule_add (ctx, SCMP_ACT_KILL, SCMP_SYS(connect), 1,
+    /* not working and vulnerable to TOUTOC */
+    /* if (seccomp_rule_add (ctx, SCMP_ACT_KILL, SCMP_SYS(connect), 1,
                           SCMP_CMP(1, SCMP_CMP_EQ, '\0')) < 0)
         goto out;
-    
+    */
 
     /* end of syscall filter list */
     
