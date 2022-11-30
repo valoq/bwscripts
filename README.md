@@ -2,8 +2,7 @@ bwscripts
 ========
 Bubblewrap example scripts
 
-This repository contains some tools for working with bubblewrap as well as example profile scripts for several programs to show how bubblewrap can be used to sandbox applications.
-
+This repository contains example profile scripts for several programs to show how bubblewrap can be used to sandbox applications.
 
 
 Install
