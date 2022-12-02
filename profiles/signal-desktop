@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROXYID=$(echo $RANDOM | base64)
+
+## zypak expects a dbus socket, so we use a proxy to isolate the real one 
+xdg-dbus-proxy unix:path=/run/user/1001/bus /run/user/1001/.dbus-proxy/session-bus-proxy-"$PROXYID" &
+
+## ! pgrep micro.sh && /usr/local/bin/micro.sh
+# /usr/local/bin/micro.sh
+
+(
+    exec bwrap \
+     --ro-bind /usr/bin /usr/bin \
+     --ro-bind /usr/share/ /usr/share/ \
+     --ro-bind /usr/lib /usr/lib \
+     --ro-bind /lib /lib \
+     --ro-bind /lib64 /lib64 \
+     --proc /proc \
+     --dev /dev  \
+     --ro-bind /etc /etc \
+     --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
+     --ro-bind /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
+     --ro-bind /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
+     --bind /run/user/"$(id -u)"/.dbus-proxy/session-bus-proxy-"$PROXYID" /run/user/"$(id -u)"/bus \
+     --bind ~/.config/Signal ~/.config/Signal \
+     --unshare-pid \
+     --unshare-ipc \
+     --unshare-uts \
+     --unshare-cgroup \
+     --new-session \
+     --seccomp 10 \
+     10< /usr/local/bin/seccomp_default_filter.bpf \
+     /usr/bin/zypak-wrapper signal-desktop --enable-features=UseOzonePlatform --ozone-platform=wayland
+)
+
+## other electron apps may require a different startup for zypak, like:
+# /usr/bin/zypak-wrapper electron19 /usr/lib/MYELECTRONAPP --enable-features=UseOzonePlatform -ozone-platform=wayland
+
