@@ -4,10 +4,7 @@ set -euo pipefail
 PROXYID=$(echo $RANDOM | base64)
 
 ## zypak expects a dbus socket, so we use a proxy to isolate the real one 
-xdg-dbus-proxy unix:path=/run/user/1001/bus /run/user/1001/.dbus-proxy/session-bus-proxy-"$PROXYID" &
-
-## ! pgrep micro.sh && /usr/local/bin/micro.sh
-# /usr/local/bin/micro.sh
+xdg-dbus-proxy unix:path=/run/user/"$UID"/bus /run/user/"$UID"/.dbus-proxy/session-bus-proxy-"$PROXYID" &
 
 (
     exec bwrap \
