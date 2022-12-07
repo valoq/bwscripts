@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROXYID=$(echo $RANDOM | base64)
+DBPROXYID=$(echo $RANDOM | base64)
+DBPROXYPATH="/run/user/$UID/.dbus-proxy"
+
+if [[ ! -d "$DBPROXYPATH" ]]
+then
+    mkdir "$DBPROXYPATH"
+fi
 
 ## zypak expects a dbus socket, so we use a proxy to isolate the real one 
-xdg-dbus-proxy unix:path=/run/user/"$UID"/bus /run/user/"$UID"/.dbus-proxy/session-bus-proxy-"$PROXYID" &
+xdg-dbus-proxy unix:path=/run/user/"$UID"/bus /run/user/"$UID"/.dbus-proxy/session-bus-proxy-"$DBPROXYID" &
 
 (
     exec bwrap \
@@ -19,7 +25,7 @@ xdg-dbus-proxy unix:path=/run/user/"$UID"/bus /run/user/"$UID"/.dbus-proxy/sessi
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
      --ro-bind /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
-     --bind /run/user/"$(id -u)"/.dbus-proxy/session-bus-proxy-"$PROXYID" /run/user/"$(id -u)"/bus \
+     --bind /run/user/"$(id -u)"/.dbus-proxy/session-bus-proxy-"$DBPROXYID" /run/user/"$(id -u)"/bus \
      --bind ~/.config/Signal ~/.config/Signal \
      --unshare-pid \
      --unshare-ipc \
