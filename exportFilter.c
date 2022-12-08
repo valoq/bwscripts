@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     DENY_RULE (acct);
     DENY_RULE (add_key);
     DENY_RULE (adjtimex);
-    /* DENY_RULE (chroot); required by firefox */
+    DENY_RULE (chroot); /* todo: check for regressions in firefox */
     DENY_RULE (clock_adjtime);
     DENY_RULE (create_module);
     DENY_RULE (delete_module);
@@ -108,6 +108,18 @@ int main(int argc, char *argv[])
     DENY_RULE (umount2);
     DENY_RULE (uselib);
     DENY_RULE (vmsplice);
+
+    /* DENY_RULE (quotactl); todo: implement as errno */
+    DENY_RULE (unshare);
+    DENY_RULE (umount);
+    DENY_RULE (open_tree);
+    DENY_RULE (move_mount);
+    DENY_RULE (fsopen);
+    DENY_RULE (fsconfig);
+    DENY_RULE (fsmount);
+    DENY_RULE (fspick);
+    DENY_RULE (mount_setattr);
+
 
     /* filter connect arguments to block communication to abstracte sockets  */
     /* not working and vulnerable to TOUTOC */
