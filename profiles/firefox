@@ -31,9 +31,11 @@ fi
      --dev-bind-try /dev/hidraw9 /dev/hidraw9 \
      --dev-bind-try /dev/char /dev/char \
      --dev-bind-try /dev/usb /dev/usb \
+     --dev-bind-try /dev/dri /dev/dri \
      --ro-bind-try /sys/bus/usb /sys/bus/usb \
      --ro-bind-try /sys/class/hidraw /sys/class/hidraw \
-     --ro-bind-try /sys/devices/pci0000:00 /sys/devices/pci0000:00 \
+     --ro-bind-try /sys/dev /sys/dev \
+     --ro-bind-try /sys/devices /sys/devices \
      --ro-bind /etc/passwd /etc/passwd \
      --ro-bind /etc/group /etc/group \
      --ro-bind /etc/hostname /etc/hostname \
@@ -52,6 +54,7 @@ fi
      --tmpfs /run \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
+     --ro-bind-try /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
      --bind-try ~/Downloads ~/Downloads \
      --bind-try ~/.mozilla ~/.mozilla \
      --bind-try ~/.cache/mozilla ~/.cache/mozilla \
