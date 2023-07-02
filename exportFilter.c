@@ -20,7 +20,8 @@
 
 
 /*
- * compile with: gcc exportFilter.c -lseccomp -o exportFilter
+ * compile with: gcc exportFilter.c -lseccomp -o exportFilter.bin
+ * generate seccomp_default_filter.bpf with: ./exportFilter.bin
  */
 
 #include <seccomp.h>
@@ -61,14 +62,14 @@ int main(int argc, char *argv[])
     DENY_RULE (acct);
     DENY_RULE (add_key);
     DENY_RULE (adjtimex);
-    DENY_RULE (chroot); /* todo: check for regressions in firefox */
+    /* DENY_RULE (chroot); required by firefox */
     DENY_RULE (clock_adjtime);
     DENY_RULE (create_module);
     DENY_RULE (delete_module);
     DENY_RULE (fanotify_init);
     DENY_RULE (finit_module);
     DENY_RULE (get_kernel_syms);
-    DENY_RULE (get_mempolicy);
+    /* DENY_RULE (get_mempolicy); required by firefox */
     DENY_RULE (init_module);
     DENY_RULE (io_cancel);
     DENY_RULE (io_destroy);
@@ -99,7 +100,7 @@ int main(int argc, char *argv[])
     DENY_RULE (reboot);
     DENY_RULE (remap_file_pages);
     DENY_RULE (request_key);
-    DENY_RULE (set_mempolicy);
+    /* DENY_RULE (set_mempolicy); required by firefox */
     DENY_RULE (swapoff);
     DENY_RULE (swapon);
     DENY_RULE (sysfs);
@@ -130,7 +131,7 @@ int main(int argc, char *argv[])
 
     /* end of syscall filter list */
     
-    filter_fd = open("seccomp_filter.bpf", O_CREAT | O_WRONLY, 0644);
+    filter_fd = open("seccomp_default_filter.bpf", O_CREAT | O_WRONLY, 0644);
     if (filter_fd == -1) {
         rc = -errno;
         goto out;

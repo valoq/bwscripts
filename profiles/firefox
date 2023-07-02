@@ -66,7 +66,7 @@ fi
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/lib/firefox/firefox
+     /usr/bin/firefox
 )
 
 # todo: block abstract sockets
