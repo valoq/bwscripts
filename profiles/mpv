@@ -8,6 +8,7 @@ set -euo pipefail
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
      --symlink /usr/bin /bin \
+     --symlink /usr/lib /lib \
      --dev /dev \
      --proc /proc \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
