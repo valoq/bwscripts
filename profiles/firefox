@@ -9,6 +9,7 @@ fi
 
 (
     exec bwrap \
+     --ro-bind /usr/bin/firefox /usr/bin/firefox \
      --ro-bind /usr/bin/sh /usr/bin/sh \
      --ro-bind /usr/share /usr/share/ \
      --ro-bind /usr/lib /usr/lib \
@@ -52,6 +53,7 @@ fi
      --ro-bind-try /etc/pulse /etc/pulse \
      --ro-bind-try /etc/pipewire /etc/pipewire \
      --tmpfs /run \
+     --tmpfs /tmp \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
      --ro-bind-try /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
@@ -70,7 +72,6 @@ fi
 )
 
 # todo: block abstract sockets
-
 
 #      --ro-bind /usr/share/locale /usr/share/locale \
 #      --ro-bind /usr/share/X11 /usr/share/X11 \

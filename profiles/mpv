@@ -6,22 +6,26 @@ set -euo pipefail
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --ro-bind /usr/lib64 /usr/lib64 \
+     --tmpfs /var/cache/fontconfig \
      --symlink /usr/lib64 /lib64 \
      --symlink /usr/bin /bin \
      --symlink /usr/lib /lib \
      --dev /dev \
+     --dev-bind /dev/dri /dev/dri \
+     --ro-bind /sys/dev /sys/dev \
+     --ro-bind /sys/devices /sys/devices \
      --proc /proc \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind-try /run/user/"$(id -u)"/pipewire-0 /run/user/"$(id -u)"/pipewire-0 \
      --ro-bind /etc /etc \
      --ro-bind-try ~/.config/mpv ~/.config/mpv \
+     --tmpfs ~/.cache/fontconfig \
      --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
-     --seccomp 10 \
-     --new-session \
-     10< /usr/local/bin/seccomp_default_filter.bpf \
+     --no-session
      /usr/bin/mpv --no-terminal "$@"
 )
 
 ## remove --no-session and --no-terminal if you want terminal control in mpv
+## the default seccomp filter has been removed here because mpv uses the kcmp syscall
