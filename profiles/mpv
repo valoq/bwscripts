@@ -23,7 +23,7 @@ set -euo pipefail
      --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
-     --no-session
+     --new-session \
      /usr/bin/mpv --no-terminal "$@"
 )
 

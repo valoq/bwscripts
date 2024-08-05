@@ -2,7 +2,7 @@
 set -euo pipefail
 (
     exec bwrap \
-     --ro-bind /usr/bin/zathura /usr/bin/zathura \
+     --ro-bind /usr/bin/zathura-sandbox /usr/bin/zathura-sandbox \
      --ro-bind /usr/share /usr/share \
      --ro-bind /usr/lib /usr/lib \
      --symlink /usr/lib /lib \
@@ -13,17 +13,14 @@ set -euo pipefail
      --ro-bind /etc/fonts /etc/fonts \
      --bind-try ~/.local/share/zathura ~/.local/share/zathura \
      --ro-bind-try ~/.config/zathura ~/.config/zathura \
-     --ro-bind-try ~/.cache/fontconfig ~/.cache/fontconfig \
+     --bind-try ~/.cache/fontconfig ~/.cache/fontconfig \
      --ro-bind-try "${@: -1}" "$(realpath "${@: -1}")" \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
      --new-session \
      --seccomp 10 \
      10< /usr/local/bin/seccomp_default_filter.bpf \
-     /usr/bin/zathura "$@"
+     /usr/bin/zathura-sandbox "$@"
 )
 
-
-## zathura also supports a native sandbox via seccomp filter
-## To use the internal sandbox in addition, add this to ~/.config/zathura/zathurarc :
-## set sandbox strict
+## zathura supports a native sandbox via seccomp and landlock in a separate zathura-sandbox binary
