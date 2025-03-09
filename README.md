@@ -4,8 +4,8 @@ Bubblewrap example scripts
 
 This repository contains example profile scripts for several programs to show how bubblewrap can be used to sandbox applications.
 
-[!Note]
-For sandboxing on production systems I would strongly recommend to use apparmor instead (or in addition). Please see [apparmor.d](https://github.com/roddhjav/apparmor.d) for application profiles.
+> [!Note]
+> For sandboxing on production systems I would strongly recommend to use apparmor instead (or in addition). Please see [apparmor.d](https://github.com/roddhjav/apparmor.d) for application profiles.
 
 
 Install
