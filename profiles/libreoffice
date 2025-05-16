@@ -8,6 +8,7 @@ set -euo pipefail
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
      --symlink /usr/bin /bin \
+     --dev /dev \
      --proc /proc \
      --tmpfs /tmp \
      --ro-bind /etc /etc \
