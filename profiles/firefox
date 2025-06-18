@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#
+# ----- WARNING -----
+# Running firefox within bubblewrap like this interferes with the internal process separation (sandbox)
+# This results in a weaker security sandbox then running firefox on its own and should be avoided
+# For additional isolation of system ressources liek user files, try the apparmor.d firefox profile instead 
+
+
 set -euo pipefail
 
 if [ ! -z "$(pgrep --uid "$(id -u)" firefox)" ]
