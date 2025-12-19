@@ -8,6 +8,7 @@ set -euo pipefail
      --symlink /usr/lib /lib \
      --ro-bind /usr/lib64 /usr/lib64 \
      --symlink /usr/lib64 /lib64 \
+     --dir /var/empty \
      --proc /proc \
      --ro-bind /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" /run/user/"$(id -u)"/"$WAYLAND_DISPLAY" \
      --ro-bind /etc/fonts /etc/fonts \
