@@ -66,6 +66,7 @@ fi
      --ro-bind-try /run/user/"$(id -u)"/pulse /run/user/"$(id -u)"/pulse \
      --bind-try ~/Downloads ~/Downloads \
      --bind-try ~/.mozilla ~/.mozilla \
+     --bind-try ~/.config/mozilla ~/.config/mozilla \
      --bind-try ~/.cache/mozilla ~/.cache/mozilla \
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --setenv MOZ_ENABLE_WAYLAND 1 \
