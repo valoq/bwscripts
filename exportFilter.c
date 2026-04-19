@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
     DENY_RULE (ioperm);
     DENY_RULE (iopl);
     DENY_RULE (ioprio_set);
-    /* DENY_RULE (kcmp); */
+    /* DENY_RULE (kcmp); required by mesa */
     DENY_RULE (kexec_file_load);
     DENY_RULE (kexec_load);
     DENY_RULE (keyctl);
