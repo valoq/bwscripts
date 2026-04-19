@@ -24,8 +24,9 @@ set -euo pipefail
      --unsetenv DBUS_SESSION_BUS_ADDRESS \
      --unshare-all \
      --new-session \
+     --seccomp 10 \
+     10< /usr/local/bin/seccomp_default_filter.bpf \
      /usr/bin/mpv --no-terminal "$@"
 )
 
 ## remove --no-session and --no-terminal if you want terminal control in mpv
-## the default seccomp filter has been removed here because mpv uses the kcmp syscall

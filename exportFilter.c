@@ -76,10 +76,13 @@ int main(int argc, char *argv[])
     DENY_RULE (io_getevents);
     DENY_RULE (io_setup);
     DENY_RULE (io_submit);
+    DENY_RULE (io_uring_setup);
+    DENY_RULE (io_uring_enter);
+    DENY_RULE (io_uring_register);
     DENY_RULE (ioperm);
     DENY_RULE (iopl);
     DENY_RULE (ioprio_set);
-    DENY_RULE (kcmp);
+    /* DENY_RULE (kcmp); */
     DENY_RULE (kexec_file_load);
     DENY_RULE (kexec_load);
     DENY_RULE (keyctl);
@@ -100,6 +103,8 @@ int main(int argc, char *argv[])
     DENY_RULE (reboot);
     DENY_RULE (remap_file_pages);
     DENY_RULE (request_key);
+    DENY_RULE (bpf);
+    DENY_RULE (userfaultfd);
     /* DENY_RULE (set_mempolicy); required by firefox */
     DENY_RULE (swapoff);
     DENY_RULE (swapon);
@@ -131,7 +136,7 @@ int main(int argc, char *argv[])
 
     /* end of syscall filter list */
     
-    filter_fd = open("seccomp_default_filter.bpf", O_CREAT | O_WRONLY, 0644);
+    filter_fd = open("seccomp_default_filter.bpf", O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (filter_fd == -1) {
         rc = -errno;
         goto out;
